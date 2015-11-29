@@ -1,0 +1,37 @@
+import "oplsaa.lt"
+
+# Atom type numbers are from the "oplsaa_subset.prm" 
+# file used to generate "oplsaa.lt".
+
+## UA means united atom
+# atom         10    6    C3    "N-Alkane CH3- (UA)"           6    15.035    1
+# atom         13    2    C2    "Alkanes -CH2- (UA)"           6    14.027    2
+
+# atom         22    6    C3    "Methanol CH3- (UA)"           6    15.035    1
+# atom         20    5    OH    "Alcohol OH (UA)"              8    15.999    2
+# atom         21    7    HO    "Alcohol OH (UA)"              1     1.008    1
+
+## These are not UA
+# atom         98   46    HC    "Methanol CH3-"                1     1.008    1
+# atom         96    5    OH    "Alcohol -OH"                  8    15.999    2
+
+Propane inherits OPLSAA {
+
+  # atomID   molID  atomTyle  charge     X        Y          Z
+  write('Data Atoms') {
+    $atom:CH3a $mol:. @atom:10   0.0    -0.748  -0.015   0.024
+    $atom:CH2  $mol:. @atom:13   0.0     0.558   0.420  -0.278
+    $atom:CH3b $mol:. @atom:10   0.0     0.716   1.404   0.137
+  }
+
+  #  Charges will be assigned by OPLSAA, so we leave them 0.0 here.
+  #
+  #  (The "." in "$mol:." refers to this molecule-object's molecule-ID number.
+  #   The "." simply means this molecule is not a part of a larger molecule.)
+
+  write('Data Bond List') {
+    $bond:CC1 $atom:CH3a $atom:CH2
+    $bond:CC2 $atom:CH2  $atom:CH3b
+  }
+
+}

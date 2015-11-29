@@ -1,0 +1,16 @@
+import "propane.lt"
+
+# Periodic boundary conditions:
+write_once("Data Boundary") {
+   0.0  36.0  xlo xhi
+   0.0  36.0  ylo yhi
+   0.0  36.0  zlo zhi
+}
+
+# Now add methane molecules:
+
+propanes = new Propane [6].move(0, 0, 6)
+                       [6].move(0, 6, 0)
+                       [6].move(6, 0, 0)
+
+propanes[*][*][*].move(2.0, 2.0, 2.0)
